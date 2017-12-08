@@ -7,10 +7,6 @@ socket.on('connect', () => {
     //     to: "jukka@emample.com",
     //     text: "Moikka"
     // })
-    socket.emit('createMessage', {
-        from: "jukka@emample.com",
-        text: "Moikka serveri!"
-    })
 
     socket.on('newMessage', (message) => {
         console.log('newMessage', message);
