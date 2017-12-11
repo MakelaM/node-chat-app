@@ -8,6 +8,13 @@ socket.on('connect', () => {
     //     text: "Moikka"
     // })
 
+    socket.on('welcomeMessage', (welcomeMessage) => {
+        console.log('welcomeMessage', welcomeMessage);
+    });
+
+    socket.on('newUser', (newUser) => {
+        console.log('newUser', newUser);
+    });
     socket.on('newMessage', (message) => {
         console.log('newMessage', message);
     });
