@@ -1,29 +1,29 @@
 var socket = io();
 
-socket.on('connect', () => {
+socket.on('connect', function () {
     console.log('Connected to server');
-
-    // socket.emit('createEmail', {
-    //     to: "jukka@emample.com",
-    //     text: "Moikka"
-    // })
-
-    socket.on('welcomeMessage', (welcomeMessage) => {
-        console.log('welcomeMessage', welcomeMessage);
+  });
+  
+  socket.on('disconnect', function () {
+    console.log('Disconnected from server');
+  });
+  
+  socket.on('newMessage', function (message) {
+    console.log('newMessage', message);
+    var li = jQuery('<li></li>');
+    li.text(`${message.from}: ${message.text}`);
+  
+    jQuery('#messages').append(li);
+  });
+  
+  jQuery('#message-form').on('submit', function (e) {
+    e.preventDefault();
+  
+    socket.emit('createMessage', {
+      from: 'User',
+      text: jQuery('[name=message]').val()
+    }, function () {
+  
     });
-
-    socket.on('newUser', (newUser) => {
-        console.log('newUser', newUser);
-    });
-    socket.on('newMessage', (message) => {
-        console.log('newMessage', message);
-    });
-});
-
-socket.on('disconnect', () => {
-    console.log('Disconnected from the server');
-});
-
-socket.on('newEmail', function (email) {
-    console.log('New email', email);
-});
+  });
+  
